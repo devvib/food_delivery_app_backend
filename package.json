@@ -7,7 +7,7 @@
     "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Nikhil Kumar",
+  "author": "Vibhav Gupta",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.27.2",
