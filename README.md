@@ -23,5 +23,5 @@ This is the backend part of the **Food Delivery App**, developed using **Node.js
 
 1. Clone the repository:
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/devvib/food_delivery_app_backend.git
 
