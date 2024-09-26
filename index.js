@@ -11,7 +11,8 @@ const app = express()
 const port = 5000
 const allowedOrigins = [
   "https://food-delivery-app-frontend-c73i.onrender.com",
-  "http://localhost:3000"
+  "http://localhost:3000",
+  "http://localhost:3001"
 ];
 app.use((req, res, next) => {
   const origin = req.headers.origin;

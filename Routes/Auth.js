@@ -5,8 +5,10 @@ const router = express.Router()
 const { body, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs')
 var jwt = require('jsonwebtoken');
+const axios = require('axios')
 const fetch = require('../middleware/fetchdetails');
-const jwtSecret = "HaHa"
+const jwtSecret = "helloworld"
+const locapi=process.env.LOCATION_API_KEY
 // var foodItems= require('../index').foodData;
 // require("../index")
 //Creating a user and storing data to MongoDB Atlas, No Login Requiered
@@ -167,5 +169,34 @@ router.post('/myOrderData', async (req, res) => {
     
 
 });
+
+router.post('/getlocation', async (req, res) => {
+    try {
+        let lat = req.body.latlong.lat
+        let long = req.body.latlong.long
+        console.log(lat, long)
+        let location = await axios
+            .get(`https://api.opencagedata.com/geocode/v1/json?q=" + lat + "+" + long + "&key=${locapi}`)
+            .then(async res => {
+                // console.log(`statusCode: ${res.status}`)
+                // console.log(res.data.results)
+                // let response = stringify(res)
+                // response = await JSON.parse(response)
+                let response = res.data.results[0].formatted;
+                console.log(response)
+                // let { village, county, state_district, state, postcode } = response
+                return response
+            })
+            .catch(error => {
+                console.error(error)
+            })
+        res.send({ location })
+
+    } catch (error) {
+        console.error(error.message)
+        res.send("Server Error")
+
+    }
+})
 
 module.exports = router
